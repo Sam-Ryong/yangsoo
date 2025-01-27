@@ -4,9 +4,11 @@ import com.example.demo.domain.member.Member;
 import com.example.demo.domain.member.MemberLoginDTO;
 import com.example.demo.domain.member.MemberRegisterDTO;
 
+import java.util.Optional;
+
 public interface MemberService {
 
     Member register(MemberRegisterDTO member);
-    Member login(MemberLoginDTO member);
+    Optional<Member> login(MemberLoginDTO member);
     Member logout();
 }
