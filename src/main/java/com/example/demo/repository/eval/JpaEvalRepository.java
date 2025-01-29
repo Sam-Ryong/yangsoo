@@ -1,4 +1,4 @@
-package com.example.demo.repository.member;
+package com.example.demo.repository.eval;
 
 import com.example.demo.domain.member.Member;
 import lombok.RequiredArgsConstructor;
@@ -10,22 +10,22 @@ import java.util.Optional;
 @Repository
 @Transactional
 @RequiredArgsConstructor
-public class JpaMemberRepository implements MemberRepository {
+public class JpaEvalRepository implements EvalRepository {
 
-    private final SpringDataJpaMemberRepository repository;
+    private final SpringDataJpaEvalRepository repository;
+
     @Override
     public Member save(Member member) {
-        return repository.save(member);
+        return null;
     }
 
     @Override
     public Optional<Member> findById(Long id) {
-        return repository.findById(id);
+        return Optional.empty();
     }
 
     @Override
     public Optional<Member> findByEmail(String email) {
-        return repository.findByEmail(email);
+        return Optional.empty();
     }
-
 }
