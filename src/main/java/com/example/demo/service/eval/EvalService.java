@@ -8,5 +8,5 @@ public interface EvalService {
 
     Eval eval(String profile);
 
-    List<Eval> bringMyEval(String email);
+    List<Eval> getMyEval(String email);
 }
