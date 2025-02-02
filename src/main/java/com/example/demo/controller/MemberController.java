@@ -7,10 +7,7 @@ import com.example.demo.service.member.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -27,12 +24,13 @@ public class MemberController {
 
     @PostMapping("/login")
     public Optional<Member> login(@RequestBody MemberLoginDTO memberLoginDTO, HttpServletRequest request) {
+
         Optional<Member> member = memberService.login(memberLoginDTO);
         if (member.isEmpty()) {
             return Optional.empty();
         }
         HttpSession session = request.getSession();
-        session.setAttribute("loginMember", member);
+        session.setAttribute("loginMember", member.get());
         return member;
     }
 

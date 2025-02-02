@@ -1,15 +1,17 @@
 package com.example.demo.repository.eval;
 
+import com.example.demo.domain.eval.Eval;
 import com.example.demo.domain.member.Member;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface EvalRepository {
 
-    Member save(Member member);
+    Eval save(Eval eval);
 
-    Optional<Member> findById(Long id);
+    Optional<Eval> findById(Long id);
 
-    Optional<Member> findByEmail(String email);
+    List<Eval> findByEmail(String email);
 
 }

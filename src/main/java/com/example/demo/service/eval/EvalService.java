@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface EvalService {
 
-    Eval eval(String profile);
+    Eval eval(String profile, String name, String email);
 
     List<Eval> getMyEval(String email);
 }
