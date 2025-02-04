@@ -19,9 +19,14 @@ public class EvalController {
 
     private final EvalService evalService;
     @PostMapping("/eval")
-    public Eval evaluate(@RequestBody EvalDTO evalDTO){
+    public Eval evaluate(@RequestBody EvalDTO evalDTO, HttpServletRequest request){
 
-        return evalService.eval(evalDTO.getProfile(), evalDTO.getName(), evalDTO.getEmail());
+        HttpSession session = request.getSession(false);
+        Member loginMember = (Member) session.getAttribute("loginMember");
+        String email = loginMember.getEmail();
+        String name = loginMember.getName();
+
+        return evalService.eval(evalDTO.getProfile(), name, email);
 
     }
 
@@ -30,7 +35,6 @@ public class EvalController {
         HttpSession session = request.getSession(false);
         Member loginMember = (Member) session.getAttribute("loginMember");
         String email = loginMember.getEmail();
-        System.out.println(email);
 
         return evalService.getMyEval(email);
     }

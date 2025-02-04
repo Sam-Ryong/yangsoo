@@ -11,4 +11,8 @@ public interface MemberService {
     Member register(MemberRegisterDTO member);
     Optional<Member> login(MemberLoginDTO member);
     Member logout();
+
+    Optional<Member> findByEmail(String email);
+
+    Optional<Member> input(String email, String input);
 }

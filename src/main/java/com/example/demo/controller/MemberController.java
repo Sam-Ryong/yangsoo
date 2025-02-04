@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.domain.member.Member;
+import com.example.demo.domain.member.MemberInputDTO;
 import com.example.demo.domain.member.MemberLoginDTO;
 import com.example.demo.domain.member.MemberRegisterDTO;
 import com.example.demo.service.member.MemberService;
@@ -33,6 +34,20 @@ public class MemberController {
         session.setAttribute("loginMember", member.get());
         return member;
     }
+    @PostMapping("/input")
+    public boolean input(@RequestBody MemberInputDTO memberInputDTO, HttpServletRequest request){
+        HttpSession session = request.getSession(false);
+        Member loginMember = (Member) session.getAttribute("loginMember");
+        String input = memberInputDTO.getProfile();
+        return memberService.input(loginMember.getEmail(), input).isPresent();
+    }
+
+    @GetMapping("/my-info")
+    public Optional<Member> myInfo(HttpServletRequest request){
+        HttpSession session = request.getSession(false);
+        Member loginMember = (Member) session.getAttribute("loginMember");
+        return memberService.findByEmail(loginMember.getEmail());
+    }
 
     @PostMapping("/logout")
     public boolean logout(HttpServletRequest request) {
@@ -43,8 +58,5 @@ public class MemberController {
         return true;
     }
 
-    @GetMapping("/test")
-    public String test(){
-        return "hello";
-    }
+
 }

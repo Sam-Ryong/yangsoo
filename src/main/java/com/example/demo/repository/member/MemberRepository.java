@@ -12,4 +12,8 @@ public interface MemberRepository {
 
     Optional<Member> findByEmail(String email);
 
+    Optional<Member> increaseCount(String email);
+
+    Optional<Member> input(String email, String input);
+
 }

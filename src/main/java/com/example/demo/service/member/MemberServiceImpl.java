@@ -29,6 +29,19 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Optional<Member> login(MemberLoginDTO member) {
+        Optional<Member> memberFound = memberRepository.findByEmail(member.getEmail());
+        if (memberFound.isEmpty()){
+            if (member.getEmail().contains("@khu.ac.kr")) {
+                Member newMember = new Member();
+                newMember.setName(member.getName());
+                newMember.setEmail(member.getEmail());
+                memberRepository.save(newMember);
+            }
+            else {
+                return Optional.empty();
+            }
+        }
+
         return memberRepository.findByEmail(member.getEmail());
     }
 
@@ -36,4 +49,16 @@ public class MemberServiceImpl implements MemberService {
     public Member logout() {
         return null;
     }
+
+    @Override
+    public Optional<Member> findByEmail(String email) {
+        return memberRepository.findByEmail(email);
+    }
+
+    @Override
+    public Optional<Member> input(String email, String input) {
+        return memberRepository.input(email, input);
+    }
+
+
 }

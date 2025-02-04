@@ -28,4 +28,28 @@ public class JpaMemberRepository implements MemberRepository {
         return repository.findByEmail(email);
     }
 
+    @Override
+    public Optional<Member> increaseCount(String email) {
+        Optional<Member> member = findByEmail(email);
+        if (member.isPresent()) {
+            Member foundMember = member.get();
+            foundMember.setCount(foundMember.getCount() + 1); // count 증가
+            repository.save(foundMember); // 수정된 멤버 저장
+            return Optional.of(foundMember); // 증가된 멤버 반환
+        }
+        return Optional.empty(); // 멤버가 존재하지 않으면 빈 Optional 반환
+    }
+
+    @Override
+    public Optional<Member> input(String email, String input) {
+        Optional<Member> member = findByEmail(email);
+        if (member.isPresent()) {
+            Member foundMember = member.get();
+            foundMember.setProfile(input);
+            repository.save(foundMember); // 수정된 멤버 저장
+        }
+        return member;
+    }
+
+
 }

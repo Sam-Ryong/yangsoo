@@ -16,5 +16,7 @@ public class Member {
 
     private String name;
     private String email;
+    private String profile;
+    private Integer count = 0;
 
 }
